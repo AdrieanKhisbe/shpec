@@ -54,7 +54,11 @@ it() {
   assertion="$1"
 }
 
-# maybe add a run/after/before block. (put precise should be run before)
+load(){ # to load a zsh file
+  [[ -f "$1" ]] || { iecho "${red}Missing File $1${norm}" >&2; return 1 }
+  iecho "Loading $1" # §later: color blue
+  . $1
+}
 
 run(){ # just run provided command
   eval $@
