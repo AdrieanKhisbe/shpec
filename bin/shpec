@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# see how to ensure bash or zsh?
+
 VERSION=0.1.2
 examples=0
 failures=0
@@ -6,6 +8,7 @@ test_indent=0
 red="\033[0;31m"
 green="\033[0;32m"
 norm="\033[0m"
+# TODO: pending, disabled
 
 indent() {
   printf '%*s' $(((test_indent - 1) * 2))
@@ -46,8 +49,10 @@ unstub_command() { unset -f "$1"; }
 it() {
   ((test_indent += 1))
   ((examples += 1))
+  # TODO: add later arg, or disabled.
   assertion="$1"
 }
+# maybe add a run/after/before block. (put precise should be run before)
 
 assert() {
   case "x$1" in
@@ -118,7 +123,14 @@ case "$1" in
 
     echo "$VERSION";;
 
-  * )
+  # §TODO: help!!
+
+
+  # TODO: generate stub structure
+
+  # TODO: debug mode?
+
+  *)
 
     matcher_files="$(find "$SHPEC_ROOT/matchers" -name '*.sh' 2>/dev/null)"
 
@@ -129,6 +141,7 @@ case "$1" in
     files="${@:-$(find $SHPEC_ROOT -name '*_shpec.sh')}"
 
     time for file in $files; do
+      ## TODO: add current directory in a special variable
       . "$file"
     done
 
