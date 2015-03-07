@@ -17,6 +17,9 @@ indent() {
 iecho() {
   indent && echo "$@"
 }
+iwarn() {
+  indent && echo "${red}$@${norm}" >&2;
+}
 
 sanitize() {
   IFS= echo -e "$1" | tr '\n' 'n' | tr "'" 'q'
@@ -55,7 +58,7 @@ it() {
 }
 
 load(){ # to load a zsh file
-  [[ -f "$1" ]] || { iecho "${red}Missing File $1${norm}" >&2; return 1 }
+  [[ -f "$1" ]] || { iwarn "Missing File $1" ; return 1 }
   iecho "Loading $1" # §later: color blue
   . $1
 }
@@ -152,6 +155,7 @@ case "$1" in
 
   *)
 
+    # Load matcher definitions
     matcher_files="$(find "$SHPEC_ROOT/matchers" -name '*.sh' 2>/dev/null)"
 
     for matcher_file in $matcher_files; do
@@ -161,7 +165,7 @@ case "$1" in
     files="${@:-$(find $SHPEC_ROOT -name '*_shpec.sh')}"
 
     time for file in $files; do
-      ## TODO: add current directory in a special variable
+      __=$SHPEC_ROOT # __ as current dir
       . "$file"
     done
 
