@@ -43,6 +43,7 @@ stub_command() {
   body="${2:-:}"
   eval "$1() { $body; }"
 }
+# maybe: add spy?
 
 unstub_command() { unset -f "$1"; }
 
@@ -52,7 +53,22 @@ it() {
   # TODO: add later arg, or disabled.
   assertion="$1"
 }
+
 # maybe add a run/after/before block. (put precise should be run before)
+
+run(){ # just run provided command
+  eval $@
+}
+
+before() {
+  ## maybe: add test that it is first
+ ((test_indent += 1))
+}
+
+after() {
+  ## maybe: add test that it is final?
+ ((test_indent += 1))
+}
 
 assert() {
   case "x$1" in
