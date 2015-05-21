@@ -1,4 +1,4 @@
-descrive "shell compatibility"
+describe "shell compatibility"
   case "$SHELL" in
     *zsh)
       describe "shpec plugin"
