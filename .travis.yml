@@ -12,6 +12,7 @@ script:
   - |
     if [ "$SHELL" = "zsh" ]; then
       disable -r end
+      echo "disable -r end" > $HOME/.zshenv
     fi
     if ${LINT:-false}; then
       shellcheck -s sh bin/shpec  # 'sh' refers to POSIX
