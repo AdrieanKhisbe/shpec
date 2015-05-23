@@ -15,10 +15,7 @@ script:
 
       cat > $HOME/.zshenv <<END
         disable -r end
-        for opt in alwaystoend completeinword cshjunkiequotes noflowcontrol  ignoreeof  login longlistjobs nonomatch  shinstdin shwordsplit
-        do
-          setopt "$opt"
-        done
+        setopt sh_word_split
     END
 
       $SHELL -c "setopt;echo '-----'; unsetopt" # for debug purposes
