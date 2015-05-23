@@ -12,13 +12,11 @@ script:
   - |
     $SHELL --version
     if [ "$SHELL" = "zsh" ]; then
-
       cat > $HOME/.zshenv <<END
         disable -r end
         setopt sh_word_split
     END
 
-      $SHELL -c "setopt;echo '-----'; unsetopt" # for debug purposes
     fi
     if ${LINT:-false}; then
       shellcheck -s sh bin/shpec  # 'sh' refers to POSIX
@@ -42,7 +40,6 @@ before_install:
     }
     install_shell(){
       echo "Install $SHELL"
-      sudo apt-add-repository -y "ppa:brainpower/testing"
       sudo apt-get update -qq
       sudo apt-get install -y $SHELL
     }
