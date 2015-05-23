@@ -17,7 +17,7 @@ script:
         disable -r end
         for opt in alwaystoend completeinword cshjunkiequotes noflowcontrol  ignoreeof  login longlistjobs nonomatch  shinstdin shwordsplit
         do
-          setopt -o $opt
+          setopt "$opt"
         done
     END
 
