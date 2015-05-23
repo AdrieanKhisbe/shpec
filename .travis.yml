@@ -12,9 +12,15 @@ script:
   - |
     $SHELL --version
     if [ "$SHELL" = "zsh" ]; then
-      $SHELL -vc "echo with original zshenv"
-      echo "disable -r end" > $HOME/.zshenv
-      $SHELL -vc "echo with new zshenv"
+
+      cat > $HOME/.zshenv <<END
+        disable -r end
+        for opt in alwaystoend completeinword cshjunkiequotes noflowcontrol  ignoreeof  login longlistjobs nonomatch  shinstdin shwordsplit
+        do
+          setopt -o $opt
+        done
+    END
+
       $SHELL -c "setopt;echo '-----'; unsetopt" # for debug purposes
     fi
     if ${LINT:-false}; then
