@@ -13,6 +13,7 @@ script:
     $SHELL --version
     if [ "$SHELL" = "zsh" ]; then
       echo "disable -r end" > $HOME/.zshenv
+      $SHELL -c "setopt;unsetopt" # for debug purposes
     fi
     if ${LINT:-false}; then
       shellcheck -s sh bin/shpec  # 'sh' refers to POSIX
