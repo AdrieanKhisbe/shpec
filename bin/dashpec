@@ -1,0 +1,4 @@
+#!/usr/bin/env dash
+
+. $(command -v shpec)
+shpec

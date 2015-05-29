@@ -3,4 +3,4 @@
 disable -r end
 setopt sh_word_split
 
-source $(where shpec|head -n 1)
+source $(command -v shpec)
